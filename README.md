@@ -10,7 +10,7 @@
 
 1. 设置->应用->可选功能->更多Windows功能，勾选“Hyper-V”、“适用于Linux的Windows子系统”、“虚拟机平台”，如果没有的选项就不用勾选。
 2. 设置->隐私和安全->开发者选项，打开“开发人员模式”。
-3. 下载并安装系统。方案一：在Microsoft store搜索“Ubuntu”进行安装；方案二：Win+R，输入`powershell`，在Windows终端中输入
+3. 下载并安装系统。方案一：在Microsoft store搜索“Ubuntu”进行安装；方案二：以管理员身份打开`powershell`，在Windows终端中输入
    ```
    > wsl --install
    ```
