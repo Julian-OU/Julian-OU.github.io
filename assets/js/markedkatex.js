@@ -1,62 +1,67 @@
-const renderer = new marked.Renderer();
+import "https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+const renderer = new marked.Renderer()
 
-var options = {
-  renderer: renderer,
-  highlight: function(code, lang) {
-    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-    return hljs.highlight(code, { language }).value;
-  },
-  pedantic: false,
-  gfm: true,
-  breaks: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  xhtml: false
-};
-marked.setOptions(options);
+let i = 0
+const next_id = () => `__special_katext_id_${i++}__`
+const math_expressions = {}
 
-function htmldecode(text){
-    var temp = document.createElement("div");
-    temp.innerHTML = text;
-    var output = temp.innerText || temp.textContent;
-    temp = null;
-    return output;
+function replace_math_with_ids(text) {
+	// Qllowing newlines inside of `$$...$$`
+	text = text.replace(/\$\$([\s\S]+?)\$\$/g, (_match, expression) => {
+		const id = next_id()
+		math_expressions[id] = {
+			type: 'block',
+			expression
+		}
+		return id
+	})
+
+	// Not allowing newlines or space inside of `$...$`
+	text = text.replace(/\$([^\n]+?)\$/g, (_match, expression) => {
+		const id = next_id()
+		math_expressions[id] = {
+			type: 'inline',
+			expression
+		}
+		return id
+	})
+
+	return text
 }
 
-function mathsExpression(expr) {
-  if (expr.match(/^\$\$[\s\S]*\$\$$/)) {
-    expr = expr.substr(2, expr.length - 4);
-    return katex.renderToString(expr, { displayMode: true });
-  } else if (expr.match(/^\$[\s\S]*\$$/)) {
-    expr = htmldecode(expr); // temp solution
-    expr = expr.substr(1, expr.length - 2);
-    return katex.renderToString(expr, { displayMode: false });
-  }
+const original_listitem = renderer.listitem
+renderer.listitem = function (text, task, checked) {
+	return original_listitem(replace_math_with_ids(text), task, checked)
 }
 
-const unchanged = new marked.Renderer()
+const original_paragraph = renderer.paragraph
+renderer.paragraph = function (text) {
+	return original_paragraph(replace_math_with_ids(text))
+}
 
-renderer.code = function(code, lang, escaped) {
-  if (!lang) {
-    const math = mathsExpression(code);
-    if (math) {
-      return math;
-    }
-  }
-  return unchanged.code(code, lang, escaped);
-};
+const original_tablecell = renderer.tablecell
+renderer.tablecell = function (content, flags) {
+	return original_tablecell(replace_math_with_ids(content), flags)
+}
 
-renderer.codespan = function(text) {
-  const math = mathsExpression(text);
-  if (math) {
-    return math;
-  }
-  return unchanged.codespan(text);
-};
+// Inline level, maybe unneded
+const original_text = renderer.text
+renderer.text = function (text) {
+	return original_text(replace_math_with_ids(text))
+}
+
 
 function markedWithKatex(text) {
-    return marked(text, options);
+	const rendered_md_only = marked(text, {
+		renderer: renderer
+	});
+	return rendered_md_only.replace(/(__special_katext_id_\d+__)/g, (_match, capture) => {
+		const {
+			type,
+			expression
+		} = math_expressions[capture]
+		return katex.renderToString(expression, {
+			displayMode: type == 'block'
+		})
+	})
 }
-
-console.log(marked("$a+b=c$", { renderer: renderer }));
