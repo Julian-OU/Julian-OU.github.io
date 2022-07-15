@@ -1,9 +1,10 @@
-@import url(fontawesome-all.min.css);
+@import url(fontawesome.min.css);
+@import url(academicons.min.css);
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic|Roboto+Slab:400,700");
 /*
 	Editorial by HTML5 UP
 	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Pro for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
@@ -92,7 +93,7 @@ body {
 /* Type */
 body, input, select, textarea {
   color: #7f888f;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", "Microsoft Yahei", sans-serif;
   font-size: 13pt;
   font-weight: 400;
   line-height: 1.65; }
@@ -132,7 +133,7 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
   color: #3d4449;
-  font-family: "Roboto Slab", serif;
+  font-family: "Roboto Slab", "Microsoft Yahei", serif;
   font-weight: 700;
   line-height: 1.5;
   margin: 0 0 1em 0; }
@@ -1120,7 +1121,7 @@ input[type="radio"] {
       text-rendering: auto;
       line-height: 1;
       text-transform: none !important;
-      font-family: 'Font Awesome 5 Free';
+      font-family: 'Font Awesome 6 Free';
       font-weight: 900; }
     input[type="checkbox"] + label:before,
     input[type="radio"] + label:before {
@@ -1199,7 +1200,7 @@ input[type="radio"] + label:before {
     text-rendering: auto;
     line-height: 1;
     text-transform: none !important;
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 6 Free', 'Academicons';
     font-weight: 400; }
   .icon > .label {
     display: none; }
@@ -1208,7 +1209,7 @@ input[type="radio"] + label:before {
   .icon.solid:before {
     font-weight: 900; }
   .icon.brands:before {
-    font-family: 'Font Awesome 5 Brands'; }
+    font-family: 'Font Awesome 6 Brands'; }
 
 /* Image */
 .image {
@@ -1373,7 +1374,7 @@ ul.contact {
       text-rendering: auto;
       line-height: 1;
       text-transform: none !important;
-      font-family: 'Font Awesome 5 Free';
+      font-family: 'Font Awesome 6 Free', 'Academicons';
       font-weight: 400; }
     ul.contact li:before {
       color: #f56a6a;
@@ -1892,7 +1893,7 @@ button,
     text-rendering: auto;
     line-height: 1;
     text-transform: none !important;
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 6 Free';
     font-weight: 900; }
   #search form:before {
     -moz-transform: scaleX(-1);
@@ -1984,7 +1985,7 @@ button,
       text-rendering: auto;
       line-height: 1;
       text-transform: none !important;
-      font-family: 'Font Awesome 5 Free';
+      font-family: 'Font Awesome 6 Free';
       font-weight: 900; }
     #sidebar .toggle:before {
       content: '\f0c9';
@@ -2087,9 +2088,10 @@ button,
   #header .logo {
     border-bottom: 0;
     color: inherit;
-    font-family: "Roboto Slab", serif;
-    font-size: 1.125em; }
+    font-family: "Roboto Slab", "Microsoft Yahei", serif;
+    font-size: 2em; }
   #header .icons {
+    padding-top: 1.1em;
     text-align: right; }
   @media screen and (max-width: 1680px) {
     #header {
@@ -2199,7 +2201,7 @@ button,
   -ms-user-select: none;
   user-select: none;
   color: #3d4449;
-  font-family: "Roboto Slab", serif;
+  font-family: "Microsoft Yahei", serif;
   font-weight: 400;
   letter-spacing: 0.075em;
   list-style: none;
@@ -2232,7 +2234,7 @@ button,
         text-rendering: auto;
         line-height: 1;
         text-transform: none !important;
-        font-family: 'Font Awesome 5 Free';
+        font-family: 'Font Awesome 6 Free';
         font-weight: 900; }
       #menu ul a.opener:before, #menu ul span.opener:before {
         -moz-transition: color 0.2s ease-in-out, -moz-transform 0.2s ease-in-out;
