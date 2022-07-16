@@ -19,7 +19,7 @@
 ### 更换软件源（可选）
 
 1. 如果没有VPN的话，建议更换软件源，以加快软件安装以及更新速度。
-2. 建议使用清华镜像源https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/。
+2. 建议使用清华镜像源 https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/ 。
 3. 查看系统版本，在Ubuntu终端中输入
    ```
    $ wslfetch
@@ -42,7 +42,7 @@
    $ cd release
    $ ./install.sh
    ```
-   或者跟随教程https://github.com/nullpo-head/WSL-Hello-sudo进行安装。
+   或者跟随教程 https://github.com/nullpo-head/WSL-Hello-sudo 进行安装。
 3. 在以后每次执行`sudo`语句时可以使用Windows hello进行身份认证。
 
 ### 全面中文支持（可选）
@@ -81,7 +81,7 @@
 
 ### Anaconda3
 
-1. 下载Anaconda3。方案一：在Windows中下载安装包，https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh；方案二：在Ubuntu中终端中输入
+1. 下载Anaconda3。方案一：在Windows中下载安装包， https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh ；方案二：在Ubuntu中终端中输入
    ```
    $ wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh
    ```
@@ -93,7 +93,7 @@
 
 ### GPU计算库（可选）
 1. 如果电脑里有NVIDIA显卡，可以安装`cupy`和`pytorch`进行GPU运算。
-2. 根据显卡型号安装最新驱动程序https://www.nvidia.cn/Download/index.aspx?lang=cn。
+2. 根据显卡型号安装最新驱动程序 https://www.nvidia.cn/Download/index.aspx?lang=cn 。
 3. 安装`pytorch`，在Ubuntu终端中输入
    ```
    $ conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch

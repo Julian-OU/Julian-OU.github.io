@@ -1313,6 +1313,9 @@ ul.tags {
     ul.tags span {
       color:  #7f888f;
       padding-left: 1em;  }
+      ul.tags span.next{
+        padding-left: 0em;
+      }
     ul.tags li .icon {
       color: inherit; }
       ul.tags li .icon:before {
@@ -1969,7 +1972,7 @@ button,
     #sidebar > .inner > * {
       border-bottom: solid 2px rgba(210, 215, 217, 0.75);
       margin: 0 0 3.5em 0;
-      padding: 0 0 3.5em 0; }
+      padding: 0 0 1.5em 0; }
       #sidebar > .inner > * > :last-child {
         margin-bottom: 0; }
       #sidebar > .inner > *:last-child {
