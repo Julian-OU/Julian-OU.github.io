@@ -1,4 +1,3 @@
-import "https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
 const renderer = new marked.Renderer()
 
 let i = 0
@@ -44,12 +43,10 @@ renderer.tablecell = function (content, flags) {
 	return original_tablecell(replace_math_with_ids(content), flags)
 }
 
-// Inline level, maybe unneded
 const original_text = renderer.text
 renderer.text = function (text) {
 	return original_text(replace_math_with_ids(text))
 }
-
 
 function markedWithKatex(text) {
 	const rendered_md_only = marked(text, {

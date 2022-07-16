@@ -197,14 +197,14 @@ code {
   background: rgba(230, 235, 237, 0.25);
   border-radius: 0.375em;
   border: solid 1px rgba(210, 215, 217, 0.75);
-  font-family: "Courier New", monospace;
+  font-family: "Source Code Pro", monospace;
   font-size: 0.9em;
   margin: 0 0.25em;
   padding: 0.25em 0.65em; }
 
 pre {
   -webkit-overflow-scrolling: touch;
-  font-family: "Courier New", monospace;
+  font-family: "Source Code Pro", monospace;
   font-size: 0.9em;
   margin: 0 0 2em 0; }
   pre code {
@@ -991,7 +991,15 @@ section.special, article.special {
   text-align: center; }
 
 header p {
-  font-family: "Roboto Slab", serif;
+  font-family: "Roboto Slab", "Microsoft Yahei", serif;
+  font-size: 1em;
+  font-weight: 400;
+  letter-spacing: 0.075em;
+  margin-top: -0.5em;
+  text-transform: uppercase; }
+
+header i {
+  font-family: "Roboto Slab", "Microsoft Yahei", serif;
   font-size: 1em;
   font-weight: 400;
   letter-spacing: 0.075em;
@@ -1290,6 +1298,25 @@ dl {
     margin: 0 0 1em 0; }
   dl dd {
     margin-left: 2em; }
+
+/* Tags */
+ul.tags {
+  cursor: default;
+  list-style: none;
+  padding-left: 0;}
+  ul.tags li {
+    color: #f56a6a;
+    display: inline-block;
+    padding: 0 3em 0 0; }
+    ul.tags li:last-child {
+      padding-right: 0; }
+    ul.tags span {
+      color:  #7f888f;
+      padding-left: 1em;  }
+    ul.tags li .icon {
+      color: inherit; }
+      ul.tags li .icon:before {
+        font-size: 1.25em; }
 
 /* Actions */
 ul.actions {
@@ -1868,7 +1895,7 @@ button,
     #main > .inner {
       padding: 0 5em 0.1em 5em ; }
       #main > .inner > section {
-        padding: 5em 0 3em 0 ; } }
+        padding: 3em 0 3em 0 ; } }
   @media screen and (max-width: 1280px) {
     #main > .inner {
       padding: 0 4em 0.1em 4em ; }
