@@ -24,37 +24,12 @@
 									<a href="index.html" class="logo"><strong>一只太阳猪的故事</strong></a>
 									<ul class="icons">
 										<script src= "assets/js/nativeshare.js" ></script>
-										<script>
-											var  nativeShare =  new  NativeShare()
-											var  shareData = {
-												title:  '分享标题' ,
-												desc:  '' ,
-												// 如果是微信该link的域名必须要在微信后台配置的安全域名之内的。
-												link:  'https://www.baidu.com' ,
-												icon:  'https://www.baidu.com' ,
-												// 不要过于依赖以下两个回调，很多浏览器是不支持的
-												success:  function () {
-													console.log( "success" )
-												},
-												fail:  function () {
-													console.log( "fail" )
-												}
-											}
-											nativeShare.setShareData(shareData)
-											function  call(command) {
-												try  {
-													nativeShare.call(command)
-												}  catch  (err) {
-													// 如果不支持，你可以在这里做降级处理
-													alert(err.message)
-													// console.log("err.message")
-												}
-											}
-										</script>
-										<li><a href="#" class="icon brands fa-qq" onclick="call('qqFriend')"><span class="label">分享到QQ</span></a></li>
-										<li><a href="#" class="icon brands fa-weixin"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-weibo"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon solid fa-star"><span class="label">Instagram</span></a></li>
+										<script src= "assets/js/share.js" ></script>
+										<li><a href="#" class="icon solid fa-share" onclick="share('default')"><span class="label">分享</span></a></li>
+										<li><a href="#" class="icon brands fa-qq" onclick="share('qqFriend')"><span class="label">分享到QQ</span></a></li>
+										<li><a href="#" class="icon brands fa-weixin" onclick="share('wechatFriend')"><span class="label">分享到微信</span></a></li>
+										<li><a href="#" class="icon brands fa-weibo" onclick="share('weibo')"><span class="label">分享到微博</span></a></li>
+										<li><a href="#" class="icon solid fa-star" onclick="favor()"><span class="label">收藏</span></a></li>
 									</ul>
 								</header>
 
@@ -64,17 +39,17 @@
 										<h1>WSL+Python+LaTex科研环境配置</h1>
 										<ul class="tags">
 											<li class="icon solid fa-user"><span>小阳</span></li>
-											<li class="icon solid fa-calendar-days"><span>2022-7-16 发布</span></li>
+											<li class="icon solid fa-calendar-days"><span>2022-7-16</span></li>
 											<li class="icon solid fa-clock-rotate-left"><span id="busuanzi_value_page_pv"></span><span class="next"> 次阅读</span></li>
 											<li class="icon solid fa-tags"><span>编程</span></li>
 										</ul>
 										<hr class="major" />
 									</header>
 									<div id="content">
-										<script src="https://cdn.jsdelivr.net/npm/marked@2.1.3/marked.min.js"></script>
-										<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-										<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
-										<script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+										<script src="https://cdn.bootcdn.net/ajax/libs/marked/4.0.17/marked.min.js"></script>
+										<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+										<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.css">
+										<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.js"></script>
 										<script src="assets/js/markedkatex.js"></script>
 										<script>								
 											jQuery.get("test.md",function(data){
@@ -155,8 +130,7 @@
 
 						<!-- Footer -->
 							<footer id="footer">
-								<p class="copyright">本站总访客数 <span id="busuanzi_value_site_uv"></span> 人.</p>
-								<p class="copyright">&copy; Julian-OU. All rights reserved. </p>
+								<p class="copyright">本站总访客数 <span id="busuanzi_value_site_uv"></span> 人.<br />&copy; 2022 @Julian-OU. All rights reserved. </p>
 							</footer>
 
 					</div>
@@ -167,7 +141,6 @@
 		<!-- Scripts -->
 			<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>

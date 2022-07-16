@@ -49,7 +49,7 @@ renderer.text = function (text) {
 }
 
 function markedWithKatex(text) {
-	const rendered_md_only = marked(text, {
+	const rendered_md_only = marked.parse(text, {
 		renderer: renderer
 	});
 	return rendered_md_only.replace(/(__special_katext_id_\d+__)/g, (_match, capture) => {

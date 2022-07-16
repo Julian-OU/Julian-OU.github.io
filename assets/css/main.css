@@ -1,5 +1,5 @@
-@import url(fontawesome.min.css);
-@import url(academicons.min.css);
+@import url(https://cdn.bootcdn.net/ajax/libs/font-awesome/6.1.1/css/all.min.css);
+@import url(https://cdn.bootcdn.net/ajax/libs/academicons/1.9.2/css/academicons.min.css);
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic|Roboto+Slab:400,700");
 /*
 	Editorial by HTML5 UP
@@ -1305,9 +1305,10 @@ ul.tags {
   list-style: none;
   padding-left: 0;}
   ul.tags li {
+    width: 8em;
     color: #f56a6a;
     display: inline-block;
-    padding: 0 3em 0 0; }
+    padding: 0 1em 0 0; }
     ul.tags li:last-child {
       padding-right: 0; }
     ul.tags span {
