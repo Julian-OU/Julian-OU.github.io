@@ -23,7 +23,35 @@
 								<header id="header">
 									<a href="index.html" class="logo"><strong>一只太阳猪的故事</strong></a>
 									<ul class="icons">
-										<li><a href="#" class="icon brands fa-qq"onclick="window.open('http://connect.qq.com/widget/shareqq/index.html?url='+encodeURIComponent(document.location.href));return false;" title="分享到QQ"><span class="label">分享到QQ</span></a></li>
+										<script src= "assets/js/nativeshare.js" ></script>
+										<script>
+											var  nativeShare =  new  NativeShare()
+											var  shareData = {
+												title:  '分享标题' ,
+												desc:  '' ,
+												// 如果是微信该link的域名必须要在微信后台配置的安全域名之内的。
+												link:  'https://www.baidu.com' ,
+												icon:  'https://www.baidu.com' ,
+												// 不要过于依赖以下两个回调，很多浏览器是不支持的
+												success:  function () {
+													console.log( "success" )
+												},
+												fail:  function () {
+													console.log( "fail" )
+												}
+											}
+											nativeShare.setShareData(shareData)
+											function  call(command) {
+												try  {
+													nativeShare.call(command)
+												}  catch  (err) {
+													// 如果不支持，你可以在这里做降级处理
+													alert(err.message)
+													// console.log("err.message")
+												}
+											}
+										</script>
+										<li><a href="#" class="icon brands fa-qq" onclick="call('qqFriend')"><span class="label">分享到QQ</span></a></li>
 										<li><a href="#" class="icon brands fa-weixin"><span class="label">Facebook</span></a></li>
 										<li><a href="#" class="icon brands fa-weibo"><span class="label">Snapchat</span></a></li>
 										<li><a href="#" class="icon solid fa-star"><span class="label">Instagram</span></a></li>
