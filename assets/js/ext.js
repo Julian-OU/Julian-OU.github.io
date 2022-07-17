@@ -61,7 +61,7 @@ function favor() {
     }
 }
 
-function loadmd(file, user, date, ...tags) {
+function loadmd(file, user, ...tags) {
     jQuery.get(file, function (data) {
         let content = document.getElementById("content");
         data = data.replace(/_/g, "\\$&");
@@ -81,7 +81,7 @@ function loadmd(file, user, date, ...tags) {
         fragment.append(li);
     var li = document.createElement("li");
         li.className = "icon solid fa-calendar-days";
-        li.innerHTML = "<span>" + date + "</span>";
+        li.innerHTML = "<span>" + file.substr(0,4)+"-"+file.substr(4,2)+"-"+file.substr(6,2) + "</span>";
         fragment.append(li);
     var li = document.createElement("li");
         li.className = "icon solid fa-clock-rotate-left";
