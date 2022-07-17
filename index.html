@@ -11,7 +11,6 @@
 		<meta name="baidu-site-verification" content="code-OMmLl5hDe6" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/all.css" />
 	</head>
 	<body class="is-preload">
 
@@ -26,10 +25,8 @@
 								<header id="header">
 									<a href="index.html" class="logo"><strong>一只太阳猪的故事</strong></a>
 									<ul class="icons">
-										<li><a href="#" class="icon brands fa-qq"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-weixin"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-weibo"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon solid fa-star"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon solid fa-share" onclick="share('default')"><span class="label">分享</span></a></li>
+										<li><a href="#" class="icon solid fa-star" onclick="favor()"><span class="label">收藏</span></a></li>
 									</ul>
 								</header>
 
@@ -219,7 +216,7 @@
 
 							<!-- Footer -->
 								<footer id="footer">
-									<p class="copyright">&copy; Julian OU. All rights reserved. </p>
+									<p class="copyright">本站总访客数 <span id="busuanzi_value_site_uv"></span> 人.<br />&copy; 2022 @Julian-OU. All rights reserved. </p>
 								</footer>
 
 						</div>
@@ -228,11 +225,14 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
+			<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+			<script src= "assets/js/nativeshare.js" ></script>
+			<script src= "assets/js/ext.js" ></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+			
 	</body>
 </html>

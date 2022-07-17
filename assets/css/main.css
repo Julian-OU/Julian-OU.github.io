@@ -206,7 +206,7 @@ pre {
   -webkit-overflow-scrolling: touch;
   font-family: "Source Code Pro", monospace;
   font-size: 0.9em;
-  margin: 0 0 2em 0; }
+  margin: 0.5em 0 0.5em 0; }
   pre code {
     display: block;
     line-height: 1.75;
@@ -2232,7 +2232,7 @@ button,
   -ms-user-select: none;
   user-select: none;
   color: #3d4449;
-  font-family: "Microsoft Yahei", serif;
+  font-family: "Roboto Slab", "Microsoft Yahei", serif;
   font-weight: 400;
   letter-spacing: 0.075em;
   list-style: none;
