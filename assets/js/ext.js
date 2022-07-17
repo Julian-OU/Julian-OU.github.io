@@ -61,41 +61,55 @@ function favor() {
     }
 }
 
-function loadmd(file, user, ...tags) {
-    jQuery.get(file, function (data) {
-        let content = document.getElementById("content");
-        data = data.replace(/_/g, "\\$&");
-        data = data.replace(/\\\\|\\\{|\\\}/g, "\\\\$&");
-        var titlestart = data.indexOf("#");
-        data = data.substr(titlestart);
-        var titleend = data.indexOf("\n");
-        document.title = data.slice(1, titleend) + " | 一只太阳猪的故事";
-        document.getElementById("title").innerHTML = data.slice(1, titleend);
-        content.innerHTML = marked.parse(data.substr(titleend));
-        renderMathInElement(content);
-    });
-    var fragment = document.createDocumentFragment();
-    var li = document.createElement("li");
-        li.className = "icon solid fa-user";
-        li.innerHTML = "<span>" + user + "</span>";
-        fragment.append(li);
-    var li = document.createElement("li");
-        li.className = "icon solid fa-calendar-days";
-        li.innerHTML = "<span>" + file.substr(0,4)+"-"+file.substr(4,2)+"-"+file.substr(6,2) + "</span>";
-        fragment.append(li);
-    var li = document.createElement("li");
-        li.className = "icon solid fa-clock-rotate-left";
-        li.innerHTML = "<span id=\"busuanzi_value_page_pv\"></span><span class=\"next\"> 次阅读</span>";
-        fragment.append(li);
-    for (let i = 0; i < tags.length; i++) {
-        var li = document.createElement("li");
-            li.className = "icon solid fa-tags";
-            li.innerHTML = "<span>" + tags[i] + "</span>";
-            fragment.append(li);
-    }
-    document.getElementById("tags").append(fragment);
-}
-
 // jQuery.get("/sidebar.html", function (data) {
 //     document.getElementById("sidebar").firstElementChild.innerHTML=data
 // });
+
+function loaddata() {
+    // 从csv读取记录并匹配
+    const url = document.location.toString().split("//")[1];
+    const pos = url.split("/");
+    const kind = pos[1];
+    const name = pos[2].split(".")[0];
+    d3.csv("/assets/db/postdata.csv", function (data) {
+            if (data.kind == kind & data.name == name) {
+                const user = data.user;
+                const tags = data.tags.split("|");
+                // 导入md文件
+                jQuery.get(name+".md", function (data) {
+                    const content = document.getElementById("content");
+                    data = data.replace(/_/g, "\\$&");
+                    data = data.replace(/\\\\|\\\{|\\\}/g, "\\\\$&");
+                    const titlestart = data.indexOf("#");
+                    data = data.substring(titlestart);
+                    const titleend = data.indexOf("\n");
+                    document.title = data.slice(1, titleend) + " | 一只太阳猪的故事";
+                    document.getElementById("title").innerHTML = data.slice(1, titleend);
+                    content.innerHTML = marked.parse(data.substring(titleend));
+                    renderMathInElement(content);
+                });
+                let fragment = document.createDocumentFragment();
+                var li = document.createElement("li");
+                    li.className = "icon solid fa-user";
+                    li.innerHTML = "<span>" + user + "</span>";
+                    fragment.append(li);
+                var li = document.createElement("li");
+                    li.className = "icon solid fa-calendar-days";
+                    li.innerHTML = "<span>" + name.substring(0,4)+"-"+name.substring(4,6)+"-"+name.substring(6,8) + "</span>";
+                    fragment.append(li);
+                var li = document.createElement("li");
+                    li.className = "icon solid fa-clock-rotate-left";
+                    li.innerHTML = "<span id=\"busuanzi_value_page_pv\"></span><span class=\"next\"> 次阅读</span>";
+                    fragment.append(li);
+                for (var i = 0; i < tags.length; i++) {
+                    let li = document.createElement("li");
+                        li.className = "icon solid fa-tags";
+                        li.innerHTML = "<span>" + tags[i] + "</span>";
+                        fragment.append(li);
+                }
+                document.getElementById("tags").append(fragment);
+                return 0;
+        }
+    });
+    
+}
