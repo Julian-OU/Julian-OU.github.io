@@ -1004,7 +1004,8 @@ header p {
 
 header i {
   font-family: "Noto Serif SC", serif;
-  font-size: 1em;
+  font-style: normal;
+  font-size: 0.7em;
   font-weight: 400;
   letter-spacing: 0.075em;
   margin-top: -0.5em;
@@ -1434,8 +1435,9 @@ ul.contact {
 /* Pagination */
 ul.pagination {
   cursor: default;
+  text-align: center;
   list-style: none;
-  padding-left: 0; }
+  padding-top: 2em; }
   ul.pagination li {
     display: inline-block;
     padding-left: 0;
