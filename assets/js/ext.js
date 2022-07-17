@@ -95,3 +95,7 @@ function loadmd(file, user, date, ...tags) {
     }
     document.getElementById("tags").append(fragment);
 }
+
+// jQuery.get("/sidebar.html", function (data) {
+//     document.getElementById("sidebar").firstElementChild.innerHTML=data
+// });
