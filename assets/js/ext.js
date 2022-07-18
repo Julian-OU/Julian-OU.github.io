@@ -168,7 +168,7 @@ function loadpost(data) {
     const a = document.createElement("a");
     a.className = "image";
     a.href = "/" + kind + "/" + name + ".html"
-    a.innerHTML = "<img src=\"/"+kind+"/images/" + name + ".png\"/>";
+    a.innerHTML = "<img src=\"https://julian-blog.oss-cn-chengdu.aliyuncs.com/"+kind+"/images/" + name + ".png\"/>";
     article.append(a);
     const h = document.createElement("h3");
     h.innerHTML = title;

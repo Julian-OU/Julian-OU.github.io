@@ -1546,13 +1546,13 @@ button,
   color: #f56a6a !important;
   cursor: pointer;
   display: inline-block;
-  font-family: "Roboto Slab", serif;
-  font-size: 0.8em;
+  font-family: "Noto Serif SC", serif;
+  font-size: 0.9em;
   font-weight: 700;
   height: 3.5em;
   letter-spacing: 0.075em;
   line-height: 3.5em;
-  padding: 0 2.25em;
+  padding: 0 1.5em;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
