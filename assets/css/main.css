@@ -1309,24 +1309,31 @@ dl {
 ul.tags {
   cursor: default;
   list-style: none;
-  padding-left: 0;}
+  margin-left: 0;}
   ul.tags li {
     width: 9em;
     color: #f56a6a;
     display: inline-block;
     padding: 0 1em 0 0; }
     ul.tags li:last-child {
-      padding-right: 0; }
+      margin-left: 0; }
     ul.tags span {
       color:  #7f888f;
-      padding-left: 1em;  }
+      margin-left: 1em;  }
       ul.tags span.next{
-        padding-left: 0em;
+        margin-left: 0em;
       }
+    ul.tags a {
+        color:  #7f888f;
+        margin-left: 1em;  }
+        ul.tags a.next{
+          margin-left: 0em;
+        }
     ul.tags li .icon {
       color: inherit; }
       ul.tags li .icon:before {
         font-size: 1.25em; }
+    
 
 /* Actions */
 ul.actions {
@@ -1618,6 +1625,15 @@ button,
   .button:disabled {
     pointer-events: none;
     opacity: 0.25; }
+  .button#totop {
+    position: fixed;
+    right: 2em;
+    bottom: 2em;
+    padding: 0 1em;
+  }
+    .button#totop .icon::before {
+      font-size: 2em;
+    }
 
 /* Mini Posts */
 .mini-posts article {

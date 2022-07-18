@@ -38,8 +38,9 @@ nativeShare.setShareData({
     }
 })
 
+
 function share(command) {
-    // 唤起浏览器原生分享组件(如果在微信中不会唤起，此时call方法只会设置文案。类似setShareData)
+    // 唤起浏览器原生分享组件（如果在微信中不会唤起，此时call方法只会设置文案。类似setShareData）
     try {
         nativeShare.call(command)
         // 如果是分享到微信则需要 nativeShare.call('wechatFriend')
@@ -50,6 +51,7 @@ function share(command) {
 }
 
 function favor() {
+    // 添加到浏览器收藏组件（如果不支持，将弹出信息）
     try {
         window.external.addFavorite(location.href, document.title);
     } catch (e) {
@@ -83,7 +85,7 @@ function loaddata() {
                     const titlestart = data.indexOf("#");
                     data = data.substring(titlestart);
                     const titleend = data.indexOf("\n");
-                    document.title = data.slice(1, titleend) + " | 一只太阳猪的故事";
+                    document.title = data.slice(1, titleend).replace(/[<](sub|sup|\/sub|\/sup)[>]/g,"") + " | 一只太阳猪的故事";
                     document.getElementById("title").innerHTML = data.slice(1, titleend);
                     content.innerHTML = marked.parse(data.substring(titleend));
                     renderMathInElement(content);
@@ -104,12 +106,49 @@ function loaddata() {
                 for (var i = 0; i < tags.length; i++) {
                     let li = document.createElement("li");
                         li.className = "icon solid fa-tags";
-                        li.innerHTML = "<span>" + tags[i] + "</span>";
+                        li.innerHTML = "<a href=\"#\">" + tags[i] + "</a>";
                         fragment.append(li);
                 }
                 document.getElementById("tags").append(fragment);
-                return 0;
         }
     });
     
 }
+
+
+window.onload = function () {
+    // 1.找到页面中的按钮
+    var totop = document.getElementById("totop");
+    totop.style.display ="none";
+    var timer = null;
+
+    // 2. 给按钮绑定点击事件
+    totop.onclick =function () {
+        // 周期性定时
+        timer = setInterval(function () {
+            // 3.获取滚动条距离浏览器顶端的距离
+            var backTop = document.documentElement.scrollTop || 
+            document.body.scrollTop;
+
+            // 越滚越慢
+            speedTop =backTop/8;
+            document.documentElement.scrollTop=backTop-speedTop;
+            if(backTop==0){
+                clearInterval(timer);
+            }
+        },30)
+    }
+    // 设置临界值
+    var pageHeight =700;
+    window.onscroll =function () {
+        var backTop = document.documentElement.scrollTop || 
+        document.body.scrollTop;
+        if(backTop>pageHeight){
+            totop.style.display="block";
+        }else{
+            totop.style.display="none";
+        }
+
+    }
+}
+ 
