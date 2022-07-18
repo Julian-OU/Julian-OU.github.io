@@ -164,10 +164,10 @@ function loadpost(data) {
     const name = data.name;
     const user = data.user
     const title = data.title
-    const abstract =data.abstract
+    const abstract = data.abstract;
     const a = document.createElement("a");
     a.className = "image";
-    a.href = name + ".html"
+    a.href = "/" + kind + "/" + name + ".html"
     a.innerHTML = "<img src=\"/"+kind+"/images/" + name + ".png\"/>";
     article.append(a);
     const h = document.createElement("h3");
