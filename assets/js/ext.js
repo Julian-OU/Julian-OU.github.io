@@ -39,6 +39,7 @@ nativeShare.setShareData({
 })
 
 
+//分享按钮
 function share(command) {
     // 唤起浏览器原生分享组件（如果在微信中不会唤起，此时call方法只会设置文案。类似setShareData）
     try {
@@ -50,6 +51,8 @@ function share(command) {
     }
 }
 
+
+//收藏按钮
 function favor() {
     // 添加到浏览器收藏组件（如果不支持，将弹出信息）
     try {
@@ -67,55 +70,8 @@ function favor() {
 //     document.getElementById("sidebar").firstElementChild.innerHTML=data
 // });
 
-function loaddata() {
-    // 从csv读取记录并匹配
-    const url = document.location.toString().split("//")[1];
-    const pos = url.split("/");
-    const kind = pos[1];
-    const name = pos[2].split(".")[0];
-    d3.csv("/assets/db/postdata.csv", function (data) {
-            if (data.kind == kind & data.name == name) {
-                const user = data.user;
-                const tags = data.tags.split("|");
-                // 导入md文件
-                jQuery.get(name+".md", function (data) {
-                    const content = document.getElementById("content");
-                    data = data.replace(/_/g, "\\$&");
-                    data = data.replace(/\\\\|\\\{|\\\}/g, "\\\\$&");
-                    const titlestart = data.indexOf("#");
-                    data = data.substring(titlestart);
-                    const titleend = data.indexOf("\n");
-                    document.title = data.slice(1, titleend).replace(/[<](sub|sup|\/sub|\/sup)[>]/g,"") + " | 一只太阳猪的故事";
-                    document.getElementById("title").innerHTML = data.slice(1, titleend);
-                    content.innerHTML = marked.parse(data.substring(titleend));
-                    renderMathInElement(content);
-                });
-                let fragment = document.createDocumentFragment();
-                var li = document.createElement("li");
-                    li.className = "icon solid fa-user";
-                    li.innerHTML = "<span>" + user + "</span>";
-                    fragment.append(li);
-                var li = document.createElement("li");
-                    li.className = "icon solid fa-calendar-days";
-                    li.innerHTML = "<span>" + name.substring(0,4)+"-"+name.substring(4,6)+"-"+name.substring(6,8) + "</span>";
-                    fragment.append(li);
-                var li = document.createElement("li");
-                    li.className = "icon solid fa-clock-rotate-left";
-                    li.innerHTML = "<span id=\"busuanzi_value_page_pv\"></span><span class=\"next\"> 次阅读</span>";
-                    fragment.append(li);
-                for (var i = 0; i < tags.length; i++) {
-                    let li = document.createElement("li");
-                        li.className = "icon solid fa-tags";
-                        li.innerHTML = "<a href=\"#\">" + tags[i] + "</a>";
-                        fragment.append(li);
-                }
-                document.getElementById("tags").append(fragment);
-        }
-    });
-    
-}
 
-
+//返回顶端
 window.onload = function () {
     // 1.找到页面中的按钮
     var totop = document.getElementById("totop");
@@ -131,7 +87,7 @@ window.onload = function () {
             document.body.scrollTop;
 
             // 越滚越慢
-            speedTop =backTop/8;
+            speedTop =backTop/5;
             document.documentElement.scrollTop=backTop-speedTop;
             if(backTop==0){
                 clearInterval(timer);
@@ -151,4 +107,118 @@ window.onload = function () {
 
     }
 }
- 
+
+
+//从数据库加载文章
+function loaddata() {
+    // 获取当前位置
+    const posi = document.location.toString().split("//")[1].split("/");
+    const kind = posi[1];
+    const name = posi[2].split(".")[0];
+    // 从csv读取记录并匹配
+    d3.csv("/assets/db/postdata.csv", function (data) {
+        if (data.kind == kind & data.name == name) {
+            const user = data.user;
+            const tags = data.tags.split("|");
+            // 导入md文件
+            jQuery.get(name+".md", function (data) {
+                const content = document.getElementById("content");
+                data = data.replace(/_/g, "\\$&");
+                data = data.replace(/\\\\|\\\{|\\\}/g, "\\\\$&");
+                data = data.substring(data.indexOf("#"));
+                const titleend = data.indexOf("\n");
+                document.title = data.slice(1, titleend).replace(/[<](sub|sup|\/sub|\/sup)[>]/g,"") + " | 一只太阳猪的故事";
+                document.getElementById("title").innerHTML = data.slice(1, titleend);
+                content.innerHTML = marked.parse(data.substring(titleend));
+                renderMathInElement(content);
+            });
+            const fragment = document.createDocumentFragment();
+            var li = document.createElement("li");
+            li.className = "icon solid fa-user";
+            li.innerHTML = "<span>" + user + "</span>";
+            fragment.append(li);
+            var li = document.createElement("li");
+            li.className = "icon solid fa-calendar-days";
+            li.innerHTML = "<span>" + name.substring(0,4)+"-"+name.substring(4,6)+"-"+name.substring(6,8) + "</span>";
+            fragment.append(li);
+            var li = document.createElement("li");
+            li.className = "icon solid fa-clock-rotate-left";
+            li.innerHTML = "<span id=\"busuanzi_value_page_pv\"></span><span class=\"next\"> 次阅读</span>";
+            fragment.append(li);
+            for (var i = 0; i < tags.length; i++) {
+                let li = document.createElement("li");
+                li.className = "icon solid fa-tags";
+                li.innerHTML = "<a href=\"#\">" + tags[i] + "</a>";
+                fragment.append(li);
+            }
+            document.getElementById("tags").append(fragment);
+        }
+    });
+    
+}
+
+
+function loadpost(data) {
+    const article = document.createElement("article")
+    const kind =data.kind
+    const name = data.name;
+    const user = data.user
+    const title = data.title
+    const abstract =data.abstract
+    const a = document.createElement("a");
+    a.className = "image";
+    a.href = name + ".html"
+    a.innerHTML = "<img src=\"/"+kind+"/images/" + name + ".png\"/>";
+    article.append(a);
+    const h = document.createElement("h3");
+    h.innerHTML = title;
+    article.append(h);
+    const tags = document.createElement("ul");
+    tags.className="tags"
+    const auth = document.createElement("li");
+    auth.className = "icon solid fa-user";
+    auth.innerHTML = "<span>" + user + "</span>";
+    tags.append(auth);
+    const date = document.createElement("li");
+    date.className = "icon solid fa-calendar-days";
+    date.innerHTML = "<span>" + name.substring(0,4)+"-"+name.substring(4,6)+"-"+name.substring(6,8) + "</span>";
+    tags.append(date);
+    article.append(tags);
+    const p = document.createElement("p");
+    p.textContent = abstract;
+    article.append(p);
+    const actions = document.createElement("ul");
+    actions.className = "actions";
+    actions.innerHTML = "<li><a href=/" + kind + "/" + name + ".html class=\"button\">查看详细</a></li>";
+    article.append(actions);
+    return article;
+}
+
+//从数据库加载目录
+function loadmenu () {
+    // 获取当前位置
+    const kind = document.location.toString().split("//")[1].split("/")[1];
+    // 从CSV读取记录并匹配
+    const fragment = document.createDocumentFragment();
+    d3.csv("/assets/db/postdata.csv", function (data) {
+        if (data.kind == kind) {
+            post= loadpost(data)
+            fragment.append(post);
+        }
+        document.getElementById("posts").append(fragment);
+    });
+}
+
+
+//从数据库加载精选
+function loadselected() {
+    // 从CSV读取记录并匹配
+    const fragment = document.createDocumentFragment();
+    d3.csv("/assets/db/postdata.csv", function (data) {
+        if (data.selected) {
+            post= loadpost(data)
+            fragment.append(post);
+        }
+        document.getElementById("posts").append(fragment);
+    });
+}

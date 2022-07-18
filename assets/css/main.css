@@ -1004,6 +1004,7 @@ header p {
   text-transform: uppercase; }
 
 header i {
+  display: inline-block;
   font-family: "Noto Serif SC", serif;
   font-style: normal;
   font-size: 0.7em;
@@ -1630,6 +1631,7 @@ button,
     right: 2em;
     bottom: 2em;
     padding: 0 1em;
+    z-index:10000;
   }
     .button#totop .icon::before {
       font-size: 2em;

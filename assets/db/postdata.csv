@@ -1,3 +1,3 @@
-kind,name,user,tags
-notes-program,20220715,小阳,WSL|Python|Latex
-notes-physics,20220717,小阳,固体物理|TMDs
+kind,name,user,tags,title,abstract,selected
+notes-physics,20220717,小阳,固体物理|TMDs,单层二硫化钼MoS<sub>2</sub>的电子输运,,1
+notes-program,20220715,小阳,WSL|Python|Latex,WSL+Python+LaTex 科研环境配置,,1
