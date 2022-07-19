@@ -1225,6 +1225,10 @@ input[type="radio"] + label:before {
     font-weight: 900; }
   .icon.brands:before {
     font-family: 'Font Awesome 6 Brands'; }
+i.icon {
+  color: #ffffff;
+  font-size: 2em;
+}
 
 /* Image */
 .image {
@@ -1633,8 +1637,9 @@ button,
     padding: 0 1em;
     z-index:10000;
   }
-    .button#totop .icon::before {
-      font-size: 2em;
+    .button#totop i.icon::before {
+      color:#f56a6a;
+      font-size: 1em;
     }
 
 /* Mini Posts */
