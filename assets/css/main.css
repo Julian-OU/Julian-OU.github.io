@@ -1288,7 +1288,7 @@ ol {
 ul {
   list-style: disc;
   margin: 0 0 2em 0;
-  padding-left: 1em; }
+  padding-left: 0em; }
   ul li {
     padding-left: 0.5em; }
   ul.alt {

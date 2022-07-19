@@ -193,7 +193,7 @@ Usage: codyhouse.co/license
   /* color: hsl(var(--vq4-color-contrast-medium-hsl)); */
   font-size: var(--vq4-text-sm);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  /* letter-spacing: 0.1em; */
 }
 
 @media not all and (min-width: 64rem) {
@@ -259,7 +259,7 @@ Usage: codyhouse.co/license
 
   .v-timeline__date {
     position: absolute;
-    top: calc(0.5 * var(--v-timeline-marker-size) + 1.2em);
+    top: calc(0.5 * var(--v-timeline-marker-size) + 1.7em);
     /* 日期位置 */
     white-space: nowrap;
   }
@@ -426,9 +426,13 @@ Usage: codyhouse.co/license
   margin-bottom: var(--vq4-space-sm);
 }
 
+.v-timeline__date-value ul.tags{
+  margin-bottom: var(--vq4-space-sm);
+}
+
 .vq4-shadow-xs {
   /* 阴影 */
-  box-shadow: 0.5em 0.5em 2em 1em rgba(0, 0, 0, 0.1);
+  box-shadow: 0.5em 0.5em 1.5em 0.5em rgba(0, 0, 0, 0.1);
 }
 
 .vq4-radius-md {
@@ -483,7 +487,7 @@ Usage: codyhouse.co/license
 }
 
 .vq4-container {
-  width: calc(100% - 2*var(--vq4-space-md));
+  /* width: calc(100%); */
   margin-left: auto;
   margin-right: auto;
 }
