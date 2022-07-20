@@ -156,6 +156,10 @@ Usage: codyhouse.co/license
   border-radius: 50%;
   margin-right: calc(var(--v-timeline-triangle-size) + var(--vq4-space-2xs));
 }
+.v-timeline__marker i.icon {
+  color: #ffffff;
+  font-size: 2em;
+}
 
 .v-timeline__item {
   position: relative;
@@ -191,15 +195,48 @@ Usage: codyhouse.co/license
 
 .v-timeline__date-value {
   /* color: hsl(var(--vq4-color-contrast-medium-hsl)); */
-  font-size: var(--vq4-text-sm);
+  font-size: calc(1.2 * var(--vq4-text-sm));
   text-transform: uppercase;
   /* letter-spacing: 0.1em; */
 }
+.v-timeline__date-value .weather {
+  display: inline-block;
+  margin-top: -6em;
+  margin-left: -6.5em;
+  height: 1em;
+  width: 6.5em;
+  vertical-align: top;
+}
+.v-timeline__date-value ul.tags{
+  margin-bottom: 0;
+  display: inline-block;
+}
+.v-timeline__date-value i.icon {
+  color: rgba(0, 0, 0, 0.05);
+  font-size: 5em;
+  top: 0.7em;
+  left: 4.2em;
+}
 
 @media not all and (min-width: 64rem) {
+  .v-timeline__date-value {
+    /* color: hsl(var(--vq4-color-contrast-medium-hsl)); */
+    font-size: var(--vq4-text-sm);
+    text-transform: uppercase;
+    /* letter-spacing: 0.1em; */
+  }
   .v-timeline__item:first-child {
     /* border-top-left-radius: 0; */
     /* 左上角的圆角 */
+  }
+}
+
+@media not all and (min-width: 450px) {
+  .v-timeline__date-value ul.tags li {
+    display: block;
+  }
+  .v-timeline__date-value i.icon {
+    left: 3.4em;
   }
 }
 
@@ -253,13 +290,17 @@ Usage: codyhouse.co/license
     transform: translateX(-100%) translateY(-50%);
   }
 
+  .v-timeline__section:nth-child(even) .v-timeline__date-value i.icon {
+    left: 0.7em;
+  }
+
   .v-timeline__section--is-hidden {
     opacity: 0;
   }
 
   .v-timeline__date {
     position: absolute;
-    top: calc(0.5 * var(--v-timeline-marker-size) + 1.7em);
+    top: calc(0.5 * var(--v-timeline-marker-size) + 1.2em);
     /* 日期位置 */
     white-space: nowrap;
   }
@@ -423,10 +464,6 @@ Usage: codyhouse.co/license
 }
 
 .vq4-margin-bottom-sm {
-  margin-bottom: var(--vq4-space-sm);
-}
-
-.v-timeline__date-value ul.tags{
   margin-bottom: var(--vq4-space-sm);
 }
 

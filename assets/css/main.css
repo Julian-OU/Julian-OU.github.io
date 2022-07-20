@@ -1225,10 +1225,6 @@ input[type="radio"] + label:before {
     font-weight: 900; }
   .icon.brands:before {
     font-family: 'Font Awesome 6 Brands'; }
-i.icon {
-  color: #ffffff;
-  font-size: 2em;
-}
 
 /* Image */
 .image {
@@ -1321,16 +1317,18 @@ ul.tags {
     display: inline-block;
     padding: 0 1em 0 0; }
     ul.tags li:last-child {
-      margin-left: 0; }
+      padding-right: 0;
+      margin-left: 0; 
+      width: auto;}
     ul.tags span {
       color:  #7f888f;
-      margin-left: 1em;  }
+      margin-left: 0.5em;  }
       ul.tags span.next{
         margin-left: 0em;
       }
     ul.tags a {
         color:  #7f888f;
-        margin-left: 1em;  }
+        margin-left: 0.5em;  }
         ul.tags a.next{
           margin-left: 0em;
         }
@@ -1338,6 +1336,12 @@ ul.tags {
       color: inherit; }
       ul.tags li .icon:before {
         font-size: 1.25em; }
+    #title ul.tags {
+      font-size: 0.8em;
+      display: inline-block;
+      margin-bottom: 0;
+      margin-left: 2em;
+    }
     
 
 /* Actions */
@@ -1636,10 +1640,11 @@ button,
     bottom: 2em;
     padding: 0 1em;
     z-index:10000;
+    background-color: rgba(255, 255, 255, 0.8);
   }
     .button#totop i.icon::before {
       color:#f56a6a;
-      font-size: 1em;
+      font-size: 2em;
     }
 
 /* Mini Posts */
