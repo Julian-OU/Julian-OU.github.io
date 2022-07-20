@@ -226,6 +226,12 @@ function loadselected () {
 // 从数据库搜索
 function search () {
     const keyword = decodeURI(document.location.toString().split("=")[1]);
+    if (keyword == '') {
+        document.getElementById("title").textContent = "所有文章 - All";
+        document.title = "所有文章 | 一只太阳猪的故事"
+    } else {
+        document.getElementById("keyword").value = keyword
+    }
     // 从CSV文件读取记录并查找
     const fragment = document.createDocumentFragment();
     d3.csv("/assets/db/postdata.csv", function (data) {
@@ -234,6 +240,6 @@ function search () {
             fragment.append(post);
         }
         document.getElementById("posts").append(fragment);
-    });String.includes
-
+    }); 
+    document.getElementById("keyword").placeholder = "请输入关键词"
 }
