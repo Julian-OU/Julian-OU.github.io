@@ -109,7 +109,7 @@ window.onload = function () {
 }
 
 
-//从数据库加载文章
+//从md文件加载文章
 function loaddata() {
     // 获取当前位置
     const posi = document.location.toString().split("//")[1].split("/");
@@ -157,7 +157,7 @@ function loaddata() {
     
 }
 
-
+// 加载一篇文章标题到目录
 function loadpost(data) {
     const article = document.createElement("article")
     const kind =data.kind
@@ -198,7 +198,7 @@ function loadpost(data) {
 function loadmenu () {
     // 获取当前位置
     const kind = document.location.toString().split("//")[1].split("/")[1];
-    // 从CSV读取记录并匹配
+    // 从CSV读取记录并匹配类别
     const fragment = document.createDocumentFragment();
     d3.csv("/assets/db/postdata.csv", function (data) {
         if (data.kind == kind) {
@@ -211,8 +211,8 @@ function loadmenu () {
 
 
 //从数据库加载精选
-function loadselected() {
-    // 从CSV读取记录并匹配
+function loadselected () {
+    // 从CSV读取记录并匹配精选
     const fragment = document.createDocumentFragment();
     d3.csv("/assets/db/postdata.csv", function (data) {
         if (data.selected) {
@@ -221,4 +221,19 @@ function loadselected() {
         }
         document.getElementById("posts").append(fragment);
     });
+}
+
+// 从数据库搜索
+function search () {
+    const keyword = decodeURI(document.location.toString().split("=")[1]);
+    // 从CSV文件读取记录并查找
+    const fragment = document.createDocumentFragment();
+    d3.csv("/assets/db/postdata.csv", function (data) {
+        if (data.title.includes(keyword) || data.tags.includes(keyword) || data.selected.includes(keyword)) {
+            post = loadpost(data)
+            fragment.append(post);
+        }
+        document.getElementById("posts").append(fragment);
+    });String.includes
+
 }

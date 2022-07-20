@@ -37,16 +37,24 @@
 										<h2>搜索 - Search</h2>
 										<div id="search">
 											<form>
-												<input type="text" name="query" id="query" placeholder="搜索 Search" />
+												<input type="text" name="keyword" id="query" placeholder="搜索 Search" />
 											</form>
 										</div>
 									</header>
-									<header class="main">
-										<h1><div id="title">页面开发中 - 敬请期待</div></h1>
-										<ul class="tags" id="tags">
+									<div class="posts" id="posts"></div>
+									<div id="pagination">
+										<ul class="pagination">
+											<li><span class="button disabled">Prev</span></li>
+											<li><a href="#" class="page active">1</a></li>
+											<li><a href="#" class="page">2</a></li>
+											<li><a href="#" class="page">3</a></li>
+											<li><span>&hellip;</span></li>
+											<li><a href="#" class="page">8</a></li>
+											<li><a href="#" class="page">9</a></li>
+											<li><a href="#" class="page">10</a></li>
+											<li><a href="#" class="button">Next</a></li>
 										</ul>
-										<hr class="major" />
-									</header>
+									</div>
 								</section>
 
 						</div>
@@ -59,7 +67,7 @@
 							<!-- Search -->
 								<section id="search" class="alt">
 									<form>
-										<input type="text" name="query" id="query" placeholder="搜索 Search" />
+										<input type="text" name="keyword" id="query" placeholder="搜索 Search" />
 									</form>
 								</section>
 
@@ -132,6 +140,11 @@
 			<script src="/assets/js/util.js"></script>
 			<script src="/assets/js/main.js"></script>
 			<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+			<script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+			<script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+			<script>
+				search()
+			</script>
 
 	</body>
 </html>
