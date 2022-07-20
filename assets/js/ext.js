@@ -124,7 +124,7 @@ function loaddata() {
             jQuery.get(name+".md", function (data) {
                 const content = document.getElementById("content");
                 data = data.replace(/_/g, "\\$&");
-                data = data.replace(/\\\\|\\\{|\\\}/g, "\\\\$&");
+                data = data.replace(/\\\\|\\\{|\\\}|\\\,/g, "\\\\$&");
                 data = data.substring(data.indexOf("#"));
                 const titleend = data.indexOf("\n");
                 document.title = data.slice(1, titleend).replace(/[<](sub|sup|\/sub|\/sup)[>]/g,"") + " | 一只太阳猪的故事";
