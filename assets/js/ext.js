@@ -116,7 +116,12 @@ function loaddata() {
     const kind = posi[1];
     const name = posi[2].split(".")[0];
     // 从csv读取记录并匹配
+    var isfirst = true;
     d3.csv("/assets/db/postdata.csv", function (data) {
+        if (isfirst) {
+            loadlatest(data);
+            isfirst = false;
+        }
         if (data.kind == kind & data.name == name) {
             const user = data.user;
             const tags = data.tags.split("|");
@@ -200,7 +205,12 @@ function loadmenu () {
     const kind = document.location.toString().split("//")[1].split("/")[1];
     // 从CSV读取记录并匹配类别
     const fragment = document.createDocumentFragment();
+    var isfirst = true;
     d3.csv("/assets/db/postdata.csv", function (data) {
+        if (isfirst) {
+            loadlatest(data);
+            isfirst = false;
+        }
         if (data.kind == kind) {
             post= loadpost(data)
             fragment.append(post);
@@ -214,7 +224,12 @@ function loadmenu () {
 function loadselected () {
     // 从CSV读取记录并匹配精选
     const fragment = document.createDocumentFragment();
+    var isfirst = true;
     d3.csv("/assets/db/postdata.csv", function (data) {
+        if (isfirst) {
+            loadlatest(data);
+            isfirst = false;
+        }
         if (data.selected) {
             post= loadpost(data)
             fragment.append(post);
@@ -234,12 +249,37 @@ function search () {
     }
     // 从CSV文件读取记录并查找
     const fragment = document.createDocumentFragment();
+    var isfirst = true;
     d3.csv("/assets/db/postdata.csv", function (data) {
+        if (isfirst) {
+            loadlatest(data);
+            isfirst = false;
+        }
         if (data.title.includes(keyword) || data.tags.includes(keyword) || data.selected.includes(keyword)) {
-            post = loadpost(data)
+            post = loadpost(data);
             fragment.append(post);
         }
         document.getElementById("posts").append(fragment);
     }); 
     document.getElementById("keyword").placeholder = "请输入关键词"
+}
+
+// 加载最新文章
+function loadlatest(data) {
+    const fragment = document.createDocumentFragment();
+    const article = document.createElement("article")
+    const kind =data.kind
+    const name = data.name;
+    const title = data.title
+    const abstract = data.abstract;
+    const a = document.createElement("a");
+    a.className = "image";
+    a.href = "/" + kind + "/" + name + ".html"
+    a.innerHTML = "<img src=\"https://julian-blog.oss-cn-chengdu.aliyuncs.com/"+kind+"/images/" + name + ".png\"/>";
+    article.append(a);
+    const p = document.createElement("p");
+    p.innerHTML = "<strong>"+title+"</strong><br/>"+abstract;
+    article.append(p);
+    fragment.append(article);
+    document.getElementById("mini-posts").append(fragment);
 }
