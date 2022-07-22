@@ -208,7 +208,7 @@ function loadmenu() {
         if (row == 0) {
             loadlatest(data);
         }
-        if (row.toString() == Math.floor(r * label[0].split("-")[0])) {
+        if (row.toString() == Math.floor(r * label[label.length-1].split("-")[0])) {
             loadlatest(data);
         }
         if (data.kind == kind) {
@@ -229,7 +229,7 @@ function loadselected() {
         if (row == 0) {
             loadlatest(data);
         }
-        if (row.toString() == Math.floor(r * label[0].split("-")[0])) {
+        if (row.toString() == Math.floor(r * label[label.length-1].split("-")[0])) {
             loadlatest(data);
         }
         if (data.selected) {
@@ -242,7 +242,10 @@ function loadselected() {
 
 // 从数据库搜索
 function search() {
-    const keyword = decodeURI(document.location.toString().split("=")[1]);
+    var keyword = decodeURI(document.location.toString().split("=")[1]);
+    if (keyword == "undefined") {
+        keyword = '';
+    }
     if (keyword == '') {
         document.getElementById("title").textContent = "所有文章 - All";
         document.title = "所有文章 | 一只太阳猪的故事"
@@ -256,7 +259,7 @@ function search() {
         if (row == 0) {
             loadlatest(data);
         }
-        if (row.toString() == Math.floor(r * label[0].split("-")[0])) {
+        if (row.toString() == Math.floor(r * label[label.length-1].split("-")[0])) {
             loadlatest(data);
         }
         if (data.title.includes(keyword) || data.tags.includes(keyword) || data.selected.includes(keyword)) {
@@ -265,7 +268,7 @@ function search() {
         }
         document.getElementById("posts").append(fragment);
     });
-    document.getElementById("keyword").placeholder = "请输入关键词"
+    // document.getElementById("keyword").placeholder = "请输入关键词"
 }
 
 // 加载最新文章
@@ -281,8 +284,8 @@ function loadlatest(data) {
     a.href = "/" + kind + "/" + name + ".html"
     a.innerHTML = "<img src=\"https://julian-blog.oss-cn-chengdu.aliyuncs.com/" + kind + "/images/" + name + ".png\"/>";
     article.append(a);
-    const p1 = document.createElement("p");
-    p1.innerHTML = "<strong>" + title + "</strong>";
+    const p1 = document.createElement("h4");
+    p1.innerHTML = title;
     article.append(p1);
     const p2 = document.createElement("p");
     p2.innerHTML = abstract;

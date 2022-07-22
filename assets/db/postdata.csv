@@ -1,6 +1,6 @@
-6-kind,name,user,tags,title,abstract,selected
-travel,20220722,小阳,时间轴|模板|html5,旅行时间轴模板,,
-notes-physics,20220719,小阳,费米分布|二维晶格|非零温,二维晶格材料非零温讨论,将讨论推广到更加现实的条件,1
+kind,name,user,tags,title,abstract,selected,6
+travel,20220722,小阳,时间轴|模板|html5,旅行时间轴模板,以 CodyHouse vertical-timeline 为模板修改而成，统一了主题，并添加天气图标。,1
+notes-physics,20220719,小阳,费米分布|二维晶格|非零温,二维晶格材料非零温讨论,将讨论推广到更加现实的条件。,1
 notes-physics,20220718-2,小猪,石墨烯|含时演化|对称性,非共振圆偏振光对石墨烯影响,,1
 notes-physics,20220718,小阳,石墨烯|TMDs|对称性,二维六角晶格材料的对称性,,1
 notes-physics,20220717,小猪，小阳,电子输运|TMDs,单层二硫化钼MoS<sub>2</sub>的电子输运,,1

@@ -1284,6 +1284,9 @@ a.image {
     -webkit-transform: scale(1.075);
     -ms-transform: scale(1.075);
     transform: scale(1.075); }
+.posts a.image {
+  box-shadow: 0.5em 0.5em 1.5em 0.5em rgba(0, 0, 0, 0.1);
+}
 
 /* List */
 ol {
@@ -1674,6 +1677,9 @@ button,
       display: block;
       width: 100%; }
   .mini-posts article p {
+    margin-bottom: 0.5em;
+  }
+  .mini-posts article h4 {
     margin-bottom: 0.5em;
   }
   .mini-posts article:first-child {
