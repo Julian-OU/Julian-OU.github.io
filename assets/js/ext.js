@@ -75,34 +75,34 @@ function favor() {
 window.onload = function () {
     // 1.找到页面中的按钮
     var totop = document.getElementById("totop");
-    totop.style.display ="none";
+    totop.style.display = "none";
     var timer = null;
 
     // 2. 给按钮绑定点击事件
-    totop.onclick =function () {
+    totop.onclick = function () {
         // 周期性定时
         timer = setInterval(function () {
             // 3.获取滚动条距离浏览器顶端的距离
-            var backTop = document.documentElement.scrollTop || 
-            document.body.scrollTop;
+            var backTop = document.documentElement.scrollTop ||
+                document.body.scrollTop;
 
             // 越滚越慢
-            speedTop =backTop/5;
-            document.documentElement.scrollTop=backTop-speedTop;
-            if(backTop==0){
+            speedTop = backTop / 5;
+            document.documentElement.scrollTop = backTop - speedTop;
+            if (backTop == 0) {
                 clearInterval(timer);
             }
-        },30)
+        }, 30)
     }
     // 设置临界值
-    var pageHeight =700;
-    window.onscroll =function () {
-        var backTop = document.documentElement.scrollTop || 
-        document.body.scrollTop;
-        if(backTop>pageHeight){
-            totop.style.display="block";
-        }else{
-            totop.style.display="none";
+    var pageHeight = 700;
+    window.onscroll = function () {
+        var backTop = document.documentElement.scrollTop ||
+            document.body.scrollTop;
+        if (backTop > pageHeight) {
+            totop.style.display = "block";
+        } else {
+            totop.style.display = "none";
         }
 
     }
@@ -116,23 +116,21 @@ function loaddata() {
     const kind = posi[1];
     const name = posi[2].split(".")[0];
     // 从csv读取记录并匹配
-    var isfirst = true;
     d3.csv("/assets/db/postdata.csv", function (data) {
-        if (isfirst) {
+        if (row == 0) {
             loadlatest(data);
-            isfirst = false;
         }
         if (data.kind == kind & data.name == name) {
             const user = data.user;
             const tags = data.tags.split("|");
             // 导入md文件
-            jQuery.get(name+".md", function (data) {
+            jQuery.get(name + ".md", function (data) {
                 const content = document.getElementById("content");
                 data = data.replace(/_/g, "\\$&");
                 data = data.replace(/\\\\|\\\{|\\\}|\\\,/g, "\\\\$&");
                 data = data.substring(data.indexOf("#"));
                 const titleend = data.indexOf("\n");
-                document.title = data.slice(1, titleend).replace(/[<](sub|sup|\/sub|\/sup)[>]/g,"") + " | 一只太阳猪的故事";
+                document.title = data.slice(1, titleend).replace(/[<](sub|sup|\/sub|\/sup)[>]/g, "") + " | 一只太阳猪的故事";
                 document.getElementById("title").innerHTML = data.slice(1, titleend);
                 content.innerHTML = marked.parse(data.substring(titleend));
                 renderMathInElement(content);
@@ -144,7 +142,7 @@ function loaddata() {
             fragment.append(li);
             var li = document.createElement("li");
             li.className = "icon solid fa-calendar-days";
-            li.innerHTML = "<span>" + name.substring(0,4)+"-"+name.substring(4,6)+"-"+name.substring(6,8) + "</span>";
+            li.innerHTML = "<span>" + name.substring(0, 4) + "-" + name.substring(4, 6) + "-" + name.substring(6, 8) + "</span>";
             fragment.append(li);
             var li = document.createElement("li");
             li.className = "icon solid fa-clock-rotate-left";
@@ -159,13 +157,13 @@ function loaddata() {
             document.getElementById("tags").append(fragment);
         }
     });
-    
+
 }
 
 // 加载一篇文章标题到目录
 function loadpost(data) {
     const article = document.createElement("article")
-    const kind =data.kind
+    const kind = data.kind
     const name = data.name;
     const user = data.user
     const title = data.title
@@ -173,20 +171,20 @@ function loadpost(data) {
     const a = document.createElement("a");
     a.className = "image";
     a.href = "/" + kind + "/" + name + ".html"
-    a.innerHTML = "<img src=\"https://julian-blog.oss-cn-chengdu.aliyuncs.com/"+kind+"/images/" + name + ".png\"/>";
+    a.innerHTML = "<img src=\"https://julian-blog.oss-cn-chengdu.aliyuncs.com/" + kind + "/images/" + name + ".png\"/>";
     article.append(a);
     const h = document.createElement("h3");
     h.innerHTML = title;
     article.append(h);
     const tags = document.createElement("ul");
-    tags.className="tags"
+    tags.className = "tags"
     const auth = document.createElement("li");
     auth.className = "icon solid fa-user";
     auth.innerHTML = "<span>" + user + "</span>";
     tags.append(auth);
     const date = document.createElement("li");
     date.className = "icon solid fa-calendar-days";
-    date.innerHTML = "<span>" + name.substring(0,4)+"-"+name.substring(4,6)+"-"+name.substring(6,8) + "</span>";
+    date.innerHTML = "<span>" + name.substring(0, 4) + "-" + name.substring(4, 6) + "-" + name.substring(6, 8) + "</span>";
     tags.append(date);
     article.append(tags);
     const p = document.createElement("p");
@@ -200,19 +198,21 @@ function loadpost(data) {
 }
 
 //从数据库加载目录
-function loadmenu () {
+function loadmenu() {
     // 获取当前位置
     const kind = document.location.toString().split("//")[1].split("/")[1];
     // 从CSV读取记录并匹配类别
     const fragment = document.createDocumentFragment();
-    var isfirst = true;
-    d3.csv("/assets/db/postdata.csv", function (data) {
-        if (isfirst) {
+    const r = Math.random()
+    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
+        if (row == 0) {
             loadlatest(data);
-            isfirst = false;
+        }
+        if (row.toString() == Math.floor(r * label[0].split("-")[0])) {
+            loadlatest(data);
         }
         if (data.kind == kind) {
-            post= loadpost(data)
+            post = loadpost(data)
             fragment.append(post);
         }
         document.getElementById("posts").append(fragment);
@@ -221,17 +221,19 @@ function loadmenu () {
 
 
 //从数据库加载精选
-function loadselected () {
+function loadselected() {
     // 从CSV读取记录并匹配精选
     const fragment = document.createDocumentFragment();
-    var isfirst = true;
-    d3.csv("/assets/db/postdata.csv", function (data) {
-        if (isfirst) {
+    const r = Math.random()
+    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
+        if (row == 0) {
             loadlatest(data);
-            isfirst = false;
+        }
+        if (row.toString() == Math.floor(r * label[0].split("-")[0])) {
+            loadlatest(data);
         }
         if (data.selected) {
-            post= loadpost(data)
+            post = loadpost(data)
             fragment.append(post);
         }
         document.getElementById("posts").append(fragment);
@@ -239,7 +241,7 @@ function loadselected () {
 }
 
 // 从数据库搜索
-function search () {
+function search() {
     const keyword = decodeURI(document.location.toString().split("=")[1]);
     if (keyword == '') {
         document.getElementById("title").textContent = "所有文章 - All";
@@ -249,18 +251,20 @@ function search () {
     }
     // 从CSV文件读取记录并查找
     const fragment = document.createDocumentFragment();
-    var isfirst = true;
-    d3.csv("/assets/db/postdata.csv", function (data) {
-        if (isfirst) {
+    const r = Math.random()
+    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
+        if (row == 0) {
             loadlatest(data);
-            isfirst = false;
+        }
+        if (row.toString() == Math.floor(r * label[0].split("-")[0])) {
+            loadlatest(data);
         }
         if (data.title.includes(keyword) || data.tags.includes(keyword) || data.selected.includes(keyword)) {
             post = loadpost(data);
             fragment.append(post);
         }
         document.getElementById("posts").append(fragment);
-    }); 
+    });
     document.getElementById("keyword").placeholder = "请输入关键词"
 }
 
@@ -268,18 +272,21 @@ function search () {
 function loadlatest(data) {
     const fragment = document.createDocumentFragment();
     const article = document.createElement("article")
-    const kind =data.kind
+    const kind = data.kind;
     const name = data.name;
-    const title = data.title
+    const title = data.title;
     const abstract = data.abstract;
     const a = document.createElement("a");
     a.className = "image";
     a.href = "/" + kind + "/" + name + ".html"
-    a.innerHTML = "<img src=\"https://julian-blog.oss-cn-chengdu.aliyuncs.com/"+kind+"/images/" + name + ".png\"/>";
+    a.innerHTML = "<img src=\"https://julian-blog.oss-cn-chengdu.aliyuncs.com/" + kind + "/images/" + name + ".png\"/>";
     article.append(a);
-    const p = document.createElement("p");
-    p.innerHTML = "<strong>"+title+"</strong><br/>"+abstract;
-    article.append(p);
+    const p1 = document.createElement("p");
+    p1.innerHTML = "<strong>" + title + "</strong>";
+    article.append(p1);
+    const p2 = document.createElement("p");
+    p2.innerHTML = abstract;
+    article.append(p2);
     fragment.append(article);
     document.getElementById("mini-posts").append(fragment);
 }
