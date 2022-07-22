@@ -116,8 +116,12 @@ function loaddata() {
     const kind = posi[1];
     const name = posi[2].split(".")[0];
     // 从csv读取记录并匹配
-    d3.csv("/assets/db/postdata.csv", function (data) {
+    const r = Math.random()
+    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
         if (row == 0) {
+            loadlatest(data);
+        }
+        if (row.toString() == Math.floor(r * label[label.length-1].split("-")[0])) {
             loadlatest(data);
         }
         if (data.kind == kind & data.name == name) {
