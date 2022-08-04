@@ -66,19 +66,14 @@ function favor() {
     }
 }
 
-// jQuery.get("/sidebar.html", function (data) {
-//     document.getElementById("sidebar").firstElementChild.innerHTML=data
-// });
-
 
 //返回顶端
 window.onload = function () {
-    // 1.找到页面中的按钮
+    // 找到页面中的按钮
     var totop = document.getElementById("totop");
     totop.style.display = "none";
     var timer = null;
-
-    // 2. 给按钮绑定点击事件
+    // 给按钮绑定点击事件
     totop.onclick = function () {
         // 周期性定时
         timer = setInterval(function () {
@@ -121,7 +116,7 @@ function loaddata() {
         if (row == 0) {
             loadlatest(data);
         }
-        if (row.toString() == Math.floor(r * label[label.length-1].split("-")[0])) {
+        if (row.toString() == Math.floor(r * label[label.length - 1].split("-")[0])) {
             loadlatest(data);
         }
         if (data.kind == kind & data.name == name) {
@@ -164,7 +159,40 @@ function loaddata() {
 
 }
 
-// 加载一篇文章标题到目录
+
+// 加载一篇时间轴
+function timeline() {
+    // 获取当前位置
+    const posi = document.location.toString().split("//")[1].split("/");
+    const kind = posi[1];
+    const name = posi[2].split(".")[0];
+    // 从csv读取记录并匹配
+    const r = Math.random();
+    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
+        if (row == 0) {
+            loadlatest(data);
+        }
+        if (row.toString() == Math.floor(r * label[label.length - 1].split("-")[0])) {
+            loadlatest(data);
+        }
+        jQuery.get(name + ".md", function (data) {
+            const titleend = data.indexOf("\n");
+            const title = data.slice(0,titleend)
+            const label = title.split("|")[0].slice(2);
+            const location = title.split("|")[1];
+            document.title = label + " | 一只太阳猪的故事";
+            document.getElementById("label").innerHTML = label;
+            document.getElementById("location").innerHTML = location;
+            const content = data.split("##")
+            for (let i = 1; 1 < split.length; i++) {
+                let section = document.createElement("section")
+            }
+        });
+    });
+}
+
+
+// 加载一篇文章摘要到目录
 function loadpost(data) {
     const article = document.createElement("article")
     const kind = data.kind
@@ -201,81 +229,8 @@ function loadpost(data) {
     return article;
 }
 
-//从数据库加载目录
-function loadmenu() {
-    // 获取当前位置
-    const kind = document.location.toString().split("//")[1].split("/")[1];
-    // 从CSV读取记录并匹配类别
-    const fragment = document.createDocumentFragment();
-    const r = Math.random()
-    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
-        if (row == 0) {
-            loadlatest(data);
-        }
-        if (row.toString() == Math.floor(r * label[label.length-1].split("-")[0])) {
-            loadlatest(data);
-        }
-        if (data.kind == kind) {
-            post = loadpost(data)
-            fragment.append(post);
-        }
-        document.getElementById("posts").append(fragment);
-    });
-}
 
-
-//从数据库加载精选
-function loadselected() {
-    // 从CSV读取记录并匹配精选
-    const fragment = document.createDocumentFragment();
-    const r = Math.random()
-    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
-        if (row == 0) {
-            loadlatest(data);
-        }
-        if (row.toString() == Math.floor(r * label[label.length-1].split("-")[0])) {
-            loadlatest(data);
-        }
-        if (data.selected) {
-            post = loadpost(data)
-            fragment.append(post);
-        }
-        document.getElementById("posts").append(fragment);
-    });
-}
-
-// 从数据库搜索
-function search() {
-    var keyword = decodeURI(document.location.toString().split("=")[1]);
-    if (keyword == "undefined") {
-        keyword = '';
-    }
-    if (keyword == '') {
-        document.getElementById("title").textContent = "所有文章 - All";
-        document.title = "所有文章 | 一只太阳猪的故事"
-    } else {
-        document.getElementById("keyword").value = keyword
-    }
-    // 从CSV文件读取记录并查找
-    const fragment = document.createDocumentFragment();
-    const r = Math.random()
-    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
-        if (row == 0) {
-            loadlatest(data);
-        }
-        if (row.toString() == Math.floor(r * label[label.length-1].split("-")[0])) {
-            loadlatest(data);
-        }
-        if (data.title.includes(keyword) || data.tags.includes(keyword) || data.selected.includes(keyword)) {
-            post = loadpost(data);
-            fragment.append(post);
-        }
-        document.getElementById("posts").append(fragment);
-    });
-    // document.getElementById("keyword").placeholder = "请输入关键词"
-}
-
-// 加载最新文章
+// 加载一篇文章到最新
 function loadlatest(data) {
     const fragment = document.createDocumentFragment();
     const article = document.createElement("article")
@@ -296,4 +251,96 @@ function loadlatest(data) {
     article.append(p2);
     fragment.append(article);
     document.getElementById("mini-posts").append(fragment);
+}
+
+
+//从数据库加载目录
+function loadmenu() {
+    // 获取当前位置
+    const kind = document.location.toString().split("//")[1].split("/")[1];
+    // 从CSV读取记录并匹配类别
+    const fragment = document.createDocumentFragment();
+    const r = Math.random()
+    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
+        if (row == 0) {
+            loadlatest(data);
+        }
+        if (row.toString() == Math.floor(r * label[label.length - 1].split("-")[0])) {
+            loadlatest(data);
+        }
+        if (data.kind == kind) {
+            post = loadpost(data)
+            fragment.append(post);
+        }
+        document.getElementById("posts").append(fragment);
+    });
+}
+
+
+//从数据库加载精选
+function loadselected() {
+    // 从CSV读取记录并匹配精选
+    const fragment = document.createDocumentFragment();
+    const r = Math.random()
+    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
+        if (row == 0) {
+            loadlatest(data);
+        }
+        if (row.toString() == Math.floor(r * label[label.length - 1].split("-")[0])) {
+            loadlatest(data);
+        }
+        if (data.selected) {
+            post = loadpost(data)
+            fragment.append(post);
+        }
+        document.getElementById("posts").append(fragment);
+    });
+}
+
+// 从数据库加载搜索
+function search() {
+    var keyword = decodeURI(document.location.toString().split("=")[1]);
+    if (keyword == "undefined") {
+        keyword = '';
+    }
+    if (keyword == '') {
+        document.getElementById("title").textContent = "所有文章 - All";
+        document.title = "所有文章 | 一只太阳猪的故事"
+    } else {
+        document.getElementById("keyword").value = keyword
+    }
+    // 从CSV文件读取记录并查找
+    const fragment = document.createDocumentFragment();
+    const r = Math.random()
+    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
+        if (row == 0) {
+            loadlatest(data);
+        }
+        if (row.toString() == Math.floor(r * label[label.length - 1].split("-")[0])) {
+            loadlatest(data);
+        }
+        if (data.title.includes(keyword) || data.tags.includes(keyword) || data.selected.includes(keyword)) {
+            post = loadpost(data);
+            fragment.append(post);
+        }
+        document.getElementById("posts").append(fragment);
+    });
+    // document.getElementById("keyword").placeholder = "请输入关键词"
+}
+
+
+// 从数据库加载词云
+function loadcloud() {
+    const Width = document.getElementById("header").clientWidth;
+    const Height = document.body.clientHeight - document.getElementById("inner").clientHeight;
+    const cloud = document.getElementById("cloud");
+    const fragment = document.createDocumentFragment();
+        let li = document.createElement("li");
+        li.className = "icon solid fa-tags";
+    li.innerHTML = "<a href=\"#\">" + "sdsd" + "</a>";
+    li.style.position = "relative"
+    li.style.top = 0.1 * Width;
+    li.style.left = 0.1 * Height;
+    fragment.append(li);
+    cloud.append(fragment);
 }

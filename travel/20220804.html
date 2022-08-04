@@ -39,9 +39,9 @@
           <header class="main">
             <h1>
               <div id="title">
-                <span>旅行时间轴模板</span>
+                <span id="label"></span>
                 <ul class="tags">
-                  <li class="icon solid fa-location-dot"><span>中国·云南·昆明</span></li>
+                  <li class="icon solid fa-location-dot"><span id="location"></span></li>
                 </ul>
               </div>
             </h1>
@@ -53,7 +53,7 @@
           <div class="vq4-position-relative vq4-z-index-1 vq4-overflow-hidden vq4-padding-y-xl vq4-bg-dark">
 
             <div class="vq4-container vq4-max-width-adaptive-lg">
-              <div class="v-timeline v-timeline--icons js-v-timeline" data-animation="on">
+              <div class="v-timeline v-timeline--icons js-v-timeline" id="timeline" data-animation="on">
                 <section class="v-timeline__section js-v-timeline__section">
                   <div class="v-timeline__marker vq4-bg-primary vq4-border vq4-border-3 vq4-border-bg-dark"
                     aria-hidden="true">
@@ -315,18 +315,15 @@
         </nav>
 
         <!-- Section -->
-        <section>
-          <header class="major">
-            <h2>推荐 &ensp; Recommended</h2>
-          </header>
-          <div class="mini-posts" id="mini-posts">
-            <article>
-              <a href="#" class="image"><img src="/images/pic07.jpg" alt="" /></a>
-              <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-            </article>
-
-          </div>
-        </section>
+				<section>
+					<header class="major">
+						<h2>推荐 &ensp; Recommended</h2>
+					</header>
+					<div class="mini-posts" id="mini-posts"></div>
+					<ul class="actions">
+						<li><a href="/search.html?keyword=" class="button">查看所有</a></li>
+					</ul>
+				</section>
 
         <!-- Section -->
         <section>
@@ -363,7 +360,11 @@
   <script src="/assets/js/main.js"></script>
   <script src="/assets/js/timeline.js"></script>
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+  <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+	<script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+  <script>
+    timeline()
+  </script>
 </body>
 
 </html>
