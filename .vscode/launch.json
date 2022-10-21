@@ -9,7 +9,7 @@
             "type": "msedge",
             "request": "launch",
             "name": "Launch Microsoft Edge and open the Edge DevTools",
-            "url": "http://127.0.0.1:5500/index.html",
+            "url": "http://127.0.0.1:3000/index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
