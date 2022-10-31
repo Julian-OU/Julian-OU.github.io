@@ -1011,7 +1011,7 @@ header i {
   font-weight: 400;
   letter-spacing: 0.075em;
   margin-top: -0.5em;
-  text-transform: uppercase; }
+  text-transform: none; }
 
 header.major > :first-child {
   border-bottom: solid 3px #f56a6a;
@@ -2044,7 +2044,7 @@ button,
     #sidebar > .inner > .alt {
       background-color: #eff1f2;
       border-bottom: 0;
-      margin: -2.22222em 0 4.44444em -2.22222em;
+      margin: -2.22222em 0 2.22222em -2.22222em;
       padding: 2.22222em;
       width: calc(100% + 4.44444em); }
   #sidebar .toggle {
@@ -2361,7 +2361,8 @@ button,
       font-size: 1em; }
     #menu > ul > li > ul > li {
       margin: 0.125em 0 0 0;
-      padding: 0.125em 0 0 0; }
+      padding: 0.125em 0 0 0;
+      text-transform: none; }
   #menu > ul > li:first-child {
     border-top: 0;
     margin-top: 0;

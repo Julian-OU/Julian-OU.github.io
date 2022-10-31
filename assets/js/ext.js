@@ -265,7 +265,7 @@ function loadmenu() {
         if (row == 0) {
             loadlatest(data);
         }
-        if (row.toString() == Math.floor(r * label[label.length - 1].split("-")[0])) {
+        if (row.toString() == Math.ceil(r * (label[label.length - 1]-1))) {
             loadlatest(data);
         }
         if (data.kind == kind) {
@@ -286,7 +286,7 @@ function loadselected() {
         if (row == 0) {
             loadlatest(data);
         }
-        if (row.toString() == Math.floor(r * label[label.length - 1].split("-")[0])) {
+        if (row.toString() == Math.ceil(r * (label[label.length - 1]-1))) {
             loadlatest(data);
         }
         if (data.selected) {
