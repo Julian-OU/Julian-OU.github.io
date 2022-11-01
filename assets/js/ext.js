@@ -177,7 +177,7 @@ function timeline() {
         }
         jQuery.get(name + ".md", function (data) {
             const titleend = data.indexOf("\n");
-            const title = data.slice(0,titleend)
+            const title = data.slice(0, titleend)
             const label = title.split("|")[0].slice(2);
             const location = title.split("|")[1];
             document.title = label + " | 一只太阳猪的故事";
@@ -265,7 +265,7 @@ function loadmenu() {
         if (row == 0) {
             loadlatest(data);
         }
-        if (row.toString() == Math.ceil(r * (label[label.length - 1]-1))) {
+        if (row.toString() == Math.ceil(r * (label[label.length - 1] - 1))) {
             loadlatest(data);
         }
         if (data.kind == kind) {
@@ -286,7 +286,7 @@ function loadselected() {
         if (row == 0) {
             loadlatest(data);
         }
-        if (row.toString() == Math.ceil(r * (label[label.length - 1]-1))) {
+        if (row == Math.ceil(r * (label[label.length - 1] - 1))) {
             loadlatest(data);
         }
         if (data.selected) {
@@ -310,21 +310,58 @@ function search() {
         document.getElementById("keyword").value = keyword
     }
     // 从CSV文件读取记录并查找
-    const fragment = document.createDocumentFragment();
+    var posts = []
     const r = Math.random()
-    d3.csv("/assets/db/postdata.csv", function (data, row, label) {
-        if (row == 0) {
-            loadlatest(data);
+    new Promise((resolve, reject) => {
+        d3.csv("/assets/db/postdata.csv", function (data, row, label) {
+            if (row == 0) {
+                loadlatest(data);
+            };
+            if (row == Math.floor(r * label[label.length - 1].split("-")[0])) {
+                loadlatest(data);
+            };
+            if (data.title.includes(keyword) || data.tags.includes(keyword) || data.abstract.includes(keyword)) {
+                post = loadpost(data);
+                posts.push(post);
+                // fragment.append(post);
+            };
+            if (row == label[label.length - 1] - 1) {
+                resolve()
+            }
+        });
+    }).then(() => {
+        const pagination=document.getElementsByClassName("pagination")[0]
+        if (posts.length == 0) {
+            pagination.innerHTML="<li><span class='button disabled'>没有找到相关内容</span></li>";
+        } else {
+            const fragment = document.createDocumentFragment();
+            const prev = document.createElement("li");
+            prev.innerHTML = "<span class='button disabled'>上一页</span>";
+            fragment.append(prev);
+            for (let i = 0; i < posts.length; i++) {
+                if (i % 6 == 0) {
+                    var page = document.createElement("div");
+                    page.classList.add("posts");
+                    page.setAttribute('id', "p" + Math.ceil((i + 1) / 6).toString());
+                }
+                page.append(posts[i]);
+                if (i % 6 == 5 || i == posts.length - 1) {
+                    document.getElementById("section").insertBefore(page, document.getElementById("pagination"));
+                    let pn = document.createElement("li");
+                    pn.innerHTML = "<a class='page'>" + Math.ceil((i + 1) / 6).toString() + "</a>";
+                    fragment.append(pn);
+                }
+            }
+            const next = document.createElement("li");
+            next.innerHTML = "<span class='button'>下一页</span>";
+            fragment.append(next);
+            pagination.append(fragment)
         }
-        if (row.toString() == Math.floor(r * label[label.length - 1].split("-")[0])) {
-            loadlatest(data);
-        }
-        if (data.title.includes(keyword) || data.tags.includes(keyword) || data.selected.includes(keyword)) {
-            post = loadpost(data);
-            fragment.append(post);
-        }
-        document.getElementById("posts").append(fragment);
-    });
+        
+    })
+    // const posts=fragment.children
+
+    // document.getElementById("posts").append(fragment);
     // document.getElementById("keyword").placeholder = "请输入关键词"
 }
 
@@ -335,8 +372,8 @@ function loadcloud() {
     const Height = document.body.clientHeight - document.getElementById("inner").clientHeight;
     const cloud = document.getElementById("cloud");
     const fragment = document.createDocumentFragment();
-        let li = document.createElement("li");
-        li.className = "icon solid fa-tags";
+    let li = document.createElement("li");
+    li.className = "icon solid fa-tags";
     li.innerHTML = "<a href=\"#\">" + "sdsd" + "</a>";
     li.style.position = "relative"
     li.style.top = 0.1 * Width;

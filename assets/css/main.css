@@ -1287,6 +1287,9 @@ a.image {
 .posts a.image {
   box-shadow: 0.5em 0.5em 1.5em 0.5em rgba(0, 0, 0, 0.1);
 }
+#banner a.image {
+  box-shadow: 0.5em 0.5em 1.5em 0.5em rgba(0, 0, 0, 0.1);
+}
 
 /* List */
 ol {
@@ -2091,7 +2094,15 @@ button,
       width: inherit; }
   #sidebar.inactive {
     margin-left: -26em; }
+  p img {
+    text-align: center;
+    width: 50%;
+  }
   @media screen and (max-width: 1680px) {
+    p img {
+      text-align: center;
+      width: 60%;
+    }
     #sidebar {
       width: 24em; }
       #sidebar > .inner {
@@ -2112,6 +2123,9 @@ button,
       #sidebar.inactive {
         margin-left: -24em; } }
   @media screen and (max-width: 1280px) {
+    p img {
+      width: 80%;
+    }
     #sidebar {
       box-shadow: 0 0 5em 0 rgba(0, 0, 0, 0.175);
       height: 100%;
@@ -2143,6 +2157,9 @@ button,
       body.is-preload #sidebar {
         display: none; } }
   @media screen and (max-width: 736px) {
+    p img {
+      width: 100%;
+    }
     #sidebar .toggle {
       text-indent: 7.25em;
       width: 7.25em; }
