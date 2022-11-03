@@ -144,10 +144,10 @@ function loaddata() {
             li.className = "icon solid fa-calendar-days";
             li.innerHTML = "<span>" + name.substring(0, 4) + "-" + name.substring(4, 6) + "-" + name.substring(6, 8) + "</span>";
             fragment.append(li);
-            var li = document.createElement("li");
-            li.className = "icon solid fa-clock-rotate-left";
-            li.innerHTML = "<span id=\"busuanzi_value_page_pv\"></span><span class=\"next\"> 次阅读</span>";
-            fragment.append(li);
+            // var li = document.createElement("li");
+            // li.className = "icon solid fa-clock-rotate-left";
+            // li.innerHTML = "<span id=\"busuanzi_value_page_pv\"></span><span class=\"next\"> 次阅读</span>";
+            // fragment.append(li);
             for (var i = 0; i < tags.length; i++) {
                 let li = document.createElement("li");
                 li.className = "icon solid fa-tags";
