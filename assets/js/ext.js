@@ -350,22 +350,23 @@ function search() {
             prev.innerHTML = "<span class='button disabled' onclick='prev();'>上一页</span>";
             fragment.append(prev);
             for (let i = 0; i < posts.length; i++) {
+                p = Math.ceil((i + 1) / 6).toString()
                 if (i % 6 == 0) {
                     var page = document.createElement("div");
                     page.classList.add("posts");
-                    page.setAttribute('id', "p" + Math.ceil((i + 1) / 6).toString());
+                    page.setAttribute('id', "p" + p);
                     page.setAttribute("style","display: none;");
                 }
                 page.append(posts[i]);
                 if (i % 6 == 5 || i == posts.length - 1) {
                     document.getElementById("section").insertBefore(page, document.getElementById("pagination"));
                     let pn = document.createElement("li");
-                    pn.innerHTML = "<a class='page'>" + Math.ceil((i + 1) / 6).toString() + "</a>";
-                    pn.setAttribute('id', Math.ceil((i + 1) / 6).toString())
+                    pn.innerHTML = "<a class='page' onclick='loadpage("+ p +");'>" + p + "</a>";
+                    pn.setAttribute('id', p)
                     if (i == posts.length - 1) {
                         fragment.append(pn);
                         pn = document.createElement("li");
-                        pn.innerHTML = "<a class='page'>" + Math.ceil((i + 1) / 6).toString() + "</a>";
+                        pn.innerHTML = "<a class='page'>" + p + "</a>";
                         pn.classList.add("last")
                     }
                     fragment.append(pn);
