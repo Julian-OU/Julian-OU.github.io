@@ -205,9 +205,9 @@ function loadpost(data) {
     const a = document.createElement("a");
     a.className = "image";
     if (special) {
-        a.href = "/" + kind + "/"+ name +".html"
+        a.href = "/" + kind + "/" + name + ".html"
     } else {
-        a.href = "/" + kind + "/post.html?id="+ name
+        a.href = "/" + kind + "/post.html?id=" + name
     }
     a.innerHTML = "<img src=\"https://julian-blog.oss-cn-chengdu.aliyuncs.com/" + kind + "/images/" + name + ".png\"/>";
     article.append(a);
@@ -248,9 +248,9 @@ function loadlatest(data) {
     const a = document.createElement("a");
     a.className = "image";
     if (special) {
-        a.href = "/" + kind + "/"+ name +".html"
+        a.href = "/" + kind + "/" + name + ".html"
     } else {
-        a.href = "/" + kind + "/post.html?id="+ name
+        a.href = "/" + kind + "/post.html?id=" + name
     }
     a.innerHTML = "<img src=\"https://julian-blog.oss-cn-chengdu.aliyuncs.com/" + kind + "/images/" + name + ".png\"/>";
     article.append(a);
@@ -276,7 +276,7 @@ function loadmenu() {
         if (row == 0) {
             loadlatest(data);
         }
-        if (row.toString() == Math.ceil(r * (label[label.length - 1] - 1))) {
+        if (row == Math.ceil(r * (label[label.length - 1] - 1))) {
             loadlatest(data);
         }
         if (data.kind == kind) {
@@ -328,47 +328,56 @@ function search() {
             if (row == 0) {
                 loadlatest(data);
             };
-            if (row == Math.floor(r * label[label.length - 1].split("-")[0])) {
+            if (row == Math.ceil(r * (label[label.length - 1] - 1))) {
                 loadlatest(data);
             };
             if (data.title.includes(keyword) || data.tags.includes(keyword) || data.abstract.includes(keyword)) {
                 post = loadpost(data);
                 posts.push(post);
-                // fragment.append(post);
             };
             if (row == label[label.length - 1] - 1) {
                 resolve()
             }
         });
     }).then(() => {
-        const pagination=document.getElementsByClassName("pagination")[0]
+        const pagination = document.getElementsByClassName("pagination")[0]
         if (posts.length == 0) {
-            pagination.innerHTML="<li><span class='button disabled'>没有找到相关内容</span></li>";
+            pagination.innerHTML = "<li><span class='button disabled'>没有找到相关内容</span></li>";
         } else {
             const fragment = document.createDocumentFragment();
             const prev = document.createElement("li");
-            prev.innerHTML = "<span class='button disabled'>上一页</span>";
+            prev.classList.add("prev")
+            prev.innerHTML = "<span class='button disabled' onclick='prev();'>上一页</span>";
             fragment.append(prev);
             for (let i = 0; i < posts.length; i++) {
                 if (i % 6 == 0) {
                     var page = document.createElement("div");
                     page.classList.add("posts");
                     page.setAttribute('id', "p" + Math.ceil((i + 1) / 6).toString());
+                    page.setAttribute("style","display: none;");
                 }
                 page.append(posts[i]);
                 if (i % 6 == 5 || i == posts.length - 1) {
                     document.getElementById("section").insertBefore(page, document.getElementById("pagination"));
                     let pn = document.createElement("li");
                     pn.innerHTML = "<a class='page'>" + Math.ceil((i + 1) / 6).toString() + "</a>";
+                    pn.setAttribute('id', Math.ceil((i + 1) / 6).toString())
+                    if (i == posts.length - 1) {
+                        fragment.append(pn);
+                        pn = document.createElement("li");
+                        pn.innerHTML = "<a class='page'>" + Math.ceil((i + 1) / 6).toString() + "</a>";
+                        pn.classList.add("last")
+                    }
                     fragment.append(pn);
                 }
             }
             const next = document.createElement("li");
-            next.innerHTML = "<span class='button'>下一页</span>";
+            next.classList.add("next")
+            next.innerHTML = "<span class='button disabled' onclick='next();'>下一页</span>";
             fragment.append(next);
             pagination.append(fragment);
         }
-        
+
     })
 }
 
