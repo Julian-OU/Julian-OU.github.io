@@ -109,7 +109,8 @@ function loaddata() {
     // 获取当前位置
     const posi = document.location.toString().split("//")[1].split("/");
     const kind = posi[1];
-    const name = posi[2].split(".")[0];
+    const searchParams = new URLSearchParams(posi[2].split(".html")[1])
+    const name = searchParams.get("id");
     // 从csv读取记录并匹配
     const r = Math.random()
     d3.csv("/assets/db/postdata.csv", function (data, row, label) {
@@ -200,9 +201,14 @@ function loadpost(data) {
     const user = data.user
     const title = data.title
     const abstract = data.abstract;
+    const special = data.special;
     const a = document.createElement("a");
     a.className = "image";
-    a.href = "/" + kind + "/" + name + ".html"
+    if (special) {
+        a.href = "/" + kind + "/"+ name +".html"
+    } else {
+        a.href = "/" + kind + "/post.html?id="+ name
+    }
     a.innerHTML = "<img src=\"https://julian-blog.oss-cn-chengdu.aliyuncs.com/" + kind + "/images/" + name + ".png\"/>";
     article.append(a);
     const h = document.createElement("h3");
@@ -238,9 +244,14 @@ function loadlatest(data) {
     const name = data.name;
     const title = data.title;
     const abstract = data.abstract;
+    const special = data.special;
     const a = document.createElement("a");
     a.className = "image";
-    a.href = "/" + kind + "/" + name + ".html"
+    if (special) {
+        a.href = "/" + kind + "/"+ name +".html"
+    } else {
+        a.href = "/" + kind + "/post.html?id="+ name
+    }
     a.innerHTML = "<img src=\"https://julian-blog.oss-cn-chengdu.aliyuncs.com/" + kind + "/images/" + name + ".png\"/>";
     article.append(a);
     const p1 = document.createElement("h4");
@@ -355,14 +366,10 @@ function search() {
             const next = document.createElement("li");
             next.innerHTML = "<span class='button'>下一页</span>";
             fragment.append(next);
-            pagination.append(fragment)
+            pagination.append(fragment);
         }
         
     })
-    // const posts=fragment.children
-
-    // document.getElementById("posts").append(fragment);
-    // document.getElementById("keyword").placeholder = "请输入关键词"
 }
 
 

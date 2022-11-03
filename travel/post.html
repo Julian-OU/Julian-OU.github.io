@@ -7,15 +7,14 @@
 <html>
 
 <head>
-	<title>搜索 | 一只太阳猪的故事</title>
+	<title>一只太阳猪的故事</title>
 	<meta charset="utf-8" />
-	<meta name="baidu-site-verification" content="code-OMmLl5hDe6" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.css">
 	<link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 
 <body class="is-preload">
-
 	<!-- Wrapper -->
 	<div id="wrapper">
 		<a href="javascript:;" id="totop" class="button"><i class="icon solid fa-angle-up"></i></a>
@@ -35,21 +34,18 @@
 					</ul>
 				</header>
 
-				<!-- Section -->
-				<section id="section">
-					<header class="major">
-						<h2 id="title">搜索 - Search</h2>
-						<div id="search">
-							<form>
-								<input type="text" name="keyword" id="keyword" placeholder="搜索 Search"/>
-							</form>
-						</div>
+				<!-- Content -->
+				<section>
+					<header class="main">
+						<h1>
+							<div id="title"></div>
+						</h1>
+						<ul class="tags" id="tags">
+						</ul>
+						<hr class="major" />
 					</header>
-					<div id="pagination">
-						<ul class="pagination"></ul>
-					</div>
+					<div id="content"></div>
 				</section>
-
 			</div>
 		</div>
 
@@ -59,8 +55,8 @@
 
 				<!-- Search -->
 				<section id="search" class="alt">
-					<form>
-						<input type="text" name="keyword" id="query" placeholder="搜索 Search"/>
+					<form action="/search.html">
+						<input type="text" name="keyword" id="query" placeholder="搜索 Search" />
 					</form>
 				</section>
 
@@ -134,9 +130,11 @@
 
 	<!-- Scripts -->
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/marked/4.0.17/marked.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.0/katex.min.js"></script>
+	<script src="/assets/js/render.js"></script>
 	<script src="/assets/js/nativeshare.js"></script>
 	<script src="/assets/js/ext.js"></script>
-	<script src="/assets/js/page.js"></script>
 	<script src="/assets/js/browser.min.js"></script>
 	<script src="/assets/js/breakpoints.min.js"></script>
 	<script src="/assets/js/util.js"></script>
@@ -145,7 +143,7 @@
 	<script src="https://d3js.org/d3-dsv.v1.min.js"></script>
 	<script src="https://d3js.org/d3-fetch.v1.min.js"></script>
 	<script>
-		search()
+		loaddata()
 	</script>
 
 </body>
