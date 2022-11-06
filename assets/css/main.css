@@ -1295,16 +1295,16 @@ a.image {
 ol {
   list-style: decimal;
   margin: 0 0 2em 0;
-  padding-left: 1.25em; }
+  padding-left: 1.75em; }
   ol li {
     padding-left: 0.25em; }
 
 ul {
   list-style: disc;
   margin: 0 0 1em 0;
-  padding-left: 0em; }
+  padding-left: 2em; }
   ul li {
-    padding-left: 0.5em; }
+    padding-left: 0em; }
   ul.alt {
     list-style: none;
     padding-left: 0; }
