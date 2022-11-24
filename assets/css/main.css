@@ -1328,7 +1328,8 @@ dl {
 ul.tags {
   cursor: default;
   list-style: none;
-  margin-left: 0;}
+  margin-left: 0;
+  padding-left: 0; }
   ul.tags li {
     width: 9em;
     color: #f56a6a;
